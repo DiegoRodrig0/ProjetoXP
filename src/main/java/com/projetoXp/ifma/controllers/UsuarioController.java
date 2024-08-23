@@ -1,5 +1,6 @@
 package com.projetoXp.ifma.controllers;
 
+import com.projetoXp.ifma.model.NivelAcesso;
 import com.projetoXp.ifma.model.Usuario;
 import com.projetoXp.ifma.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -58,5 +60,17 @@ public class UsuarioController {
             response.put("message", "E-mail inválido.");
             return ResponseEntity.badRequest().body(response);
         }
+    }
+
+    @PutMapping("/{id}/atualizar-status")
+    public ResponseEntity<Usuario> atualizarNivelAcesso(@PathVariable Long id, @RequestParam String novoStatus) {
+        Usuario usuarioValidado = usuarioService.atualizarNivelAcesso(id, novoStatus);
+        return new ResponseEntity<>(usuarioValidado, HttpStatus.OK);
+    }
+
+    @GetMapping("/filtrar-nivel-acesso")
+    public ResponseEntity<List<Usuario>> filtrarUsuarios(@RequestParam NivelAcesso nivelAcesso) {
+        List<Usuario> usuarios = usuarioService.buscarUsuariosPorNivelAcesso(nivelAcesso);
+        return new ResponseEntity<>(usuarios, HttpStatus.OK);
     }
 }

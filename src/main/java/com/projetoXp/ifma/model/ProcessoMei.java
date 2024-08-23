@@ -13,8 +13,8 @@ public class ProcessoMei {
     private String empresa;
 
     @ManyToOne
-    @JoinColumn(name = "categoria_atividade_id", nullable = false)
-    private CategoriaEmpresa categoriaAtividade;
+    @JoinColumn(name = "categoria_categoriaEmpresa_id", nullable = false)
+    private CategoriaEmpresa categoriaEmpresa;
 
     private String descricaoAtividade;
 
@@ -53,12 +53,12 @@ public class ProcessoMei {
         this.empresa = empresa;
     }
 
-    public CategoriaEmpresa getCategoriaAtividade() {
-        return categoriaAtividade;
+    public CategoriaEmpresa getCategoriaEmpresa() {
+        return categoriaEmpresa;
     }
 
-    public void setCategoriaAtividade(CategoriaEmpresa categoriaAtividade) {
-        this.categoriaAtividade = categoriaAtividade;
+    public void setCategoriaEmpresa(CategoriaEmpresa categoriaEmpresa) {
+        this.categoriaEmpresa = categoriaEmpresa;
     }
 
     public String getDescricaoAtividade() {
