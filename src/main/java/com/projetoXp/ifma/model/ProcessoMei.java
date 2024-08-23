@@ -1,7 +1,6 @@
 package com.projetoXp.ifma.model;
 
 import jakarta.persistence.*;
-
 import java.util.Date;
 
 @Entity
