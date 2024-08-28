@@ -1,6 +1,7 @@
 package com.projetoXp.ifma.model;
 
 import jakarta.persistence.*;
+
 import java.util.Date;
 
 @Entity
@@ -29,10 +30,6 @@ public class ProcessoMei {
 
     @Enumerated(EnumType.STRING)
     private StatusProcesso statusProcesso;
-
-    @ManyToOne
-    @JoinColumn(name = "usuario_id", nullable = false)
-    private Usuario usuario;
 
     private Date dataInicio;
     private Date dataConclusao;
@@ -100,14 +97,6 @@ public class ProcessoMei {
 
     public void setStatusProcesso(StatusProcesso statusProcesso) {
         this.statusProcesso = statusProcesso;
-    }
-
-    public Usuario getUsuario() {
-        return usuario;
-    }
-
-    public void setUsuario(Usuario usuario) {
-        this.usuario = usuario;
     }
 
     public Date getDataInicio() {
