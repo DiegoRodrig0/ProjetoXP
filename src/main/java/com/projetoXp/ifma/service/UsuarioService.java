@@ -1,7 +1,6 @@
 package com.projetoXp.ifma.service;
 
 import com.projetoXp.ifma.model.NivelAcesso;
-import com.projetoXp.ifma.model.StatusProcesso;
 import com.projetoXp.ifma.model.Usuario;
 import com.projetoXp.ifma.repositories.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +18,27 @@ public class UsuarioService {
 
     public Usuario salvarUsuario(Usuario usuario) {
         return usuarioRepository.save(usuario);
+    }
+
+    public Usuario registrarUsuário(String email, String senha) {
+        Usuario usuario = new Usuario();
+        usuario.setEmail(email);
+        usuario.setSenha(senha);
+        return usuario;
+    }
+
+    public Usuario login(String email, String senha) throws Exception {
+        Usuario usuario = usuarioRepository.findByEmail(email);
+
+        if (usuario == null) {
+            throw new Exception("Usuário não encontrado.");
+        }
+
+        if (senha != usuario.getSenha()) {
+            throw new Exception("Senha incorreta.");
+        }
+
+        return usuario;
     }
 
     public boolean validarEmail(String email) {
