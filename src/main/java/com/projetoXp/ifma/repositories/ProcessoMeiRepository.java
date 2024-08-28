@@ -9,6 +9,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface ProcessoMeiRepository extends JpaRepository<ProcessoMei, Long> {
-    Optional<ProcessoMei> finByNomeAndCpf(String nome, String cpf);
     
 }

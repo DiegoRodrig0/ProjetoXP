@@ -2,7 +2,9 @@ package com.projetoXp.ifma.service;
 
 import com.projetoXp.ifma.model.ProcessoMei;
 import com.projetoXp.ifma.model.StatusProcesso;
+import com.projetoXp.ifma.model.UsuarioMei;
 import com.projetoXp.ifma.repositories.ProcessoMeiRepository;
+import com.projetoXp.ifma.repositories.UsuarioMeiRepository;
 
 import java.util.Optional;
 
@@ -14,6 +16,9 @@ public class ProcessoMeiService {
 
     @Autowired
     private ProcessoMeiRepository processoMeiRepository;
+
+    @Autowired
+    private UsuarioMeiRepository usuarioMeiRepository;
 
     @Autowired
     private EmailService emailService;
@@ -55,19 +60,4 @@ public class ProcessoMeiService {
         return processoAtualizado;
     }
 
-    public ProcessoMei verificarPendencias(String nome, String cpf) {
-        Optional<ProcessoMei> processoMeiOpt = processoMeiRepository.finByNomeAndCpf(nome, cpf);
-        
-        if(processoMeiOpt.isPresent()) {
-            ProcessoMei processoMei = processoMeiOpt.get();
-            if (processoMei.getTemPendencias()) {
-                return processoMei;
-            } else {
-                String assunto = "O processo não possui pendencias";
-            } 
-        } else {
-            throw new IllegalArgumentException("Processo não encontrado para o nome: " + nome + " e CPF: " + cpf);
-        }
-        return null;
-    }
 }
