@@ -3,7 +3,6 @@ package com.projetoXp.ifma.model;
 import jakarta.persistence.*;
 
 import java.util.Date;
-import java.util.List;
 
 @Entity
 public class Usuario {
@@ -20,12 +19,6 @@ public class Usuario {
     private Date dataNascimento;
     private String nacionalidade;
     private String senha;
-
-    @Enumerated(EnumType.STRING)
-    private NivelAcesso nivelAcesso;
-
-    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<ProcessoMei> processos;
 
     public Long getId() {
         return id;
@@ -97,21 +90,5 @@ public class Usuario {
 
     public void setSenha(String senha) {
         this.senha = senha  ;
-    }
-
-    public NivelAcesso getNivelAcesso() {
-        return nivelAcesso;
-    }
-
-    public void setNivelAcesso(NivelAcesso nivelAcesso) {
-        this.nivelAcesso = nivelAcesso;
-    }
-
-    public List<ProcessoMei> getProcessos() {
-        return processos;
-    }
-
-    public void setProcessos(List<ProcessoMei> processos) {
-        this.processos = processos;
     }
 }

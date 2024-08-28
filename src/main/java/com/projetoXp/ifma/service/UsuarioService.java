@@ -2,6 +2,8 @@ package com.projetoXp.ifma.service;
 
 import com.projetoXp.ifma.model.NivelAcesso;
 import com.projetoXp.ifma.model.Usuario;
+import com.projetoXp.ifma.model.UsuarioFuncionario;
+import com.projetoXp.ifma.repositories.UsuarioFuncionarioRepository;
 import com.projetoXp.ifma.repositories.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,6 +17,8 @@ public class UsuarioService {
 
     @Autowired
     private UsuarioRepository usuarioRepository;
+    @Autowired
+    private UsuarioFuncionarioRepository usuarioFuncionarioRepository;
 
     public Usuario salvarUsuario(Usuario usuario) {
         return usuarioRepository.save(usuario);
@@ -56,13 +60,13 @@ public class UsuarioService {
     }
 
     public boolean isCpfUnico(String cpf) {
-        Optional<Usuario> usuario = usuarioRepository.findByCpf(cpf);
-        return usuario.isEmpty(); // Retorna true se o CPF não for encontrado
+        Optional<UsuarioFuncionario> usuarioFuncionario = usuarioFuncionarioRepository.findByCpf(cpf);
+        return usuarioFuncionario.isEmpty(); // Retorna true se o CPF não for encontrado
     }
 
-    public Usuario atualizarNivelAcesso(Long id, String status) {
+    public UsuarioFuncionario atualizarNivelAcesso(Long id, String status) {
         // Encontra o usuário pelo ID
-        Usuario usuario = usuarioRepository.findById(id)
+        UsuarioFuncionario usuario = usuarioFuncionarioRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Usuário não encontrado"));
 
         if(status.toUpperCase().equals("ADMINISTRADOR")){
@@ -78,6 +82,6 @@ public class UsuarioService {
     }
 
     public List<Usuario> buscarUsuariosPorNivelAcesso(NivelAcesso nivelAcesso) {
-        return usuarioRepository.findByNivelAcesso(nivelAcesso);
+        return usuarioFuncionarioRepository.findByNivelAcesso(nivelAcesso);
     }
 }
