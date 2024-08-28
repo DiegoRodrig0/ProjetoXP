@@ -14,7 +14,6 @@ public class Usuario {
 
     private String nome;
     private String cpf;
-    private String cnpj;
     private String email;
     private String telefone;
     private String endereco;
@@ -50,14 +49,6 @@ public class Usuario {
 
     public void setCpf(String cpf) {
         this.cpf = cpf;
-    }
-
-    public String getCnpj() {
-        return cnpj;
-    }
-
-    public void setCnpj(String cnpj) {
-        this.cnpj = cnpj;
     }
 
     public String getEmail() {

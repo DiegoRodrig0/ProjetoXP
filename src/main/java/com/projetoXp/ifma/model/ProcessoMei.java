@@ -36,6 +36,7 @@ public class ProcessoMei {
 
     private Date dataInicio;
     private Date dataConclusao;
+    private Boolean temPendencias;
 
     public Long getId() {
         return id;
@@ -123,5 +124,13 @@ public class ProcessoMei {
 
     public void setDataConclusao(Date dataConclusao) {
         this.dataConclusao = dataConclusao;
+    }
+
+    public Boolean getTemPendencias() {
+        return temPendencias;
+    }
+
+    public void setTemPendencias(Boolean temPendencias) {
+        this.temPendencias = temPendencias;
     }
 }

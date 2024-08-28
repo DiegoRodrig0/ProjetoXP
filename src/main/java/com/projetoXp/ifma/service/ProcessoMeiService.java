@@ -3,6 +3,9 @@ package com.projetoXp.ifma.service;
 import com.projetoXp.ifma.model.ProcessoMei;
 import com.projetoXp.ifma.model.StatusProcesso;
 import com.projetoXp.ifma.repositories.ProcessoMeiRepository;
+
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -50,5 +53,21 @@ public class ProcessoMeiService {
         emailService.enviarEmail(destinatario, assunto, mensagem);
 
         return processoAtualizado;
+    }
+
+    public ProcessoMei verificarPendencias(String nome, String cpf) {
+        Optional<ProcessoMei> processoMeiOpt = processoMeiRepository.finByNomeAndCpf(nome, cpf);
+        
+        if(processoMeiOpt.isPresent()) {
+            ProcessoMei processoMei = processoMeiOpt.get();
+            if (processoMei.getTemPendencias()) {
+                return processoMei;
+            } else {
+                String assunto = "O processo não possui pendencias";
+            } 
+        } else {
+            throw new IllegalArgumentException("Processo não encontrado para o nome: " + nome + " e CPF: " + cpf);
+        }
+        return null;
     }
 }
