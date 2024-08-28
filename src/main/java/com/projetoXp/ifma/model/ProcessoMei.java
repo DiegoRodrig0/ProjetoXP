@@ -13,6 +13,10 @@ public class ProcessoMei {
 
     private String empresa;
 
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "usuariomei_id", referencedColumnName = "id")
+    private UsuarioMei usuarioMei;
+
     @ManyToOne
     @JoinColumn(name = "categoria_categoriaEmpresa_id", nullable = false)
     private CategoriaEmpresa categoriaEmpresa;
@@ -41,6 +45,14 @@ public class ProcessoMei {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public UsuarioMei getUsuarioMei() {
+        return usuarioMei;
+    }
+
+    public void setUsuarioMei(UsuarioMei usuarioMei) {
+        this.usuarioMei = usuarioMei;
     }
 
     public String getEmpresa() {

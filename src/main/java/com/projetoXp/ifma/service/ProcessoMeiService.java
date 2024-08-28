@@ -22,7 +22,7 @@ public class ProcessoMeiService {
         ProcessoMei processoSalvo = processoMeiRepository.save(processoMei);
 
         // Enviar e-mail ao usuário após o registro
-        String destinatario = processoMei.getUsuario().getEmail();
+        String destinatario = processoMei.getUsuarioMei().getEmail();
         String assunto = "Notificação de Registro de Processo";
         String mensagem = String.format("Seu processo de abertura de MEI foi registrado com sucesso. \nStatus inicial: %s", processoMei.getStatusProcesso());
         emailService.enviarEmail(destinatario, assunto, mensagem);
@@ -47,7 +47,7 @@ public class ProcessoMeiService {
         ProcessoMei processoAtualizado = processoMeiRepository.save(processo);
 
         // Enviar e-mail ao usuário após a atualização do status
-        String destinatario = processo.getUsuario().getEmail();
+        String destinatario = processo.getUsuarioMei().getEmail();
         String assunto = "Atualização de Status do Processo";
         String mensagem = String.format("O status do seu processo foi atualizado para: %s", processo.getStatusProcesso());
         emailService.enviarEmail(destinatario, assunto, mensagem);
